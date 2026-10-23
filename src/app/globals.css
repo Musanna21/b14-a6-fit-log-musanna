@@ -1,26 +1,98 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --fitlog-bg: #080908;
+  --fitlog-panel: #111311;
+  --fitlog-panel-hover: #191c17;
+  --fitlog-lime: #ccff00;
+  --fitlog-border: #292d26;
+  --fitlog-muted: #a0a49b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100vh;
+  background: var(--fitlog-bg);
+  color: #f4f5ef;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--fitlog-lime);
+  color: #080908;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--fitlog-lime);
+  outline-offset: 3px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.section-anchor {
+  scroll-margin-top: 6rem;
+}
+
+.fitlog-lime {
+  color: var(--fitlog-lime);
+}
+
+.fitlog-panel {
+  background: var(--fitlog-panel);
+  border: 1px solid var(--fitlog-border);
+}
+
+.fitlog-button {
+  background: var(--fitlog-lime);
+  color: #080908;
+  font-weight: 800;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.fitlog-button:hover {
+  background: #d9ff4d;
+  transform: translateY(-1px);
+}
+
+.fitlog-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+@keyframes fitlog-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.fitlog-skeleton {
+  animation: fitlog-pulse 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
