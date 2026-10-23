@@ -39,7 +39,7 @@ function WorkoutCard ({ workout }) {
           className='h-full w-full object-cover transition duration-500 group-hover:scale-105'
         />
 
-        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10' />
+        <div className='absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/10' />
 
         <div className='absolute bottom-3 left-3 flex flex-wrap gap-2'>
           {workout.muscleGroups.slice(0, 3).map(muscle => (
@@ -133,7 +133,7 @@ export default function WorkoutLibrary ({ initialWorkouts }) {
   return (
     <section
       id='library'
-      className='section-anchor mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-20'
+      className='section-anchor mx-auto max-w-360 px-5 py-16 sm:px-8 lg:px-12 lg:py-20'
     >
       <div className='mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between'>
         <div>
@@ -159,7 +159,7 @@ export default function WorkoutLibrary ({ initialWorkouts }) {
               onChange={event => setSearch(event.target.value)}
               placeholder='Search workouts...'
               aria-label='Search workouts'
-              className='w-full bg-transparent text-sm text-white outline-none placeholder:text-neutral-600 sm:w-48'
+              className='w-full bg-transparent text-sm text-white outline-none sm:w-48'
             />
           </label>
 
