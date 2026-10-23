@@ -1,40 +1,15 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowDownRight, Dumbbell } from 'lucide-react'
+import WorkoutLibrary from './components/workout-library'
+import { getWorkouts } from './lib/fitlog'
 
-function WorkoutSkeleton ({ index }) {
-  return (
-    <article
-      aria-hidden='true'
-      className='overflow-hidden rounded-2xl border border-white/10 bg-[#111311]'
-    >
-      <div className='fitlog-skeleton h-44 bg-white/[0.04]' />
+export default async function Home () {
+  const workouts = await getWorkouts()
 
-      <div className='space-y-4 p-4'>
-        <div className='flex gap-2'>
-          <div className='fitlog-skeleton h-5 w-16 rounded-full bg-white/10' />
-          <div className='fitlog-skeleton h-5 w-12 rounded-full bg-white/10' />
-        </div>
-
-        <div className='fitlog-skeleton h-5 w-4/5 rounded bg-white/10' />
-
-        <div className='fitlog-skeleton h-3 w-2/3 rounded bg-white/[0.07]' />
-
-        <div className='flex justify-between border-t border-white/10 pt-4'>
-          <div className='fitlog-skeleton h-4 w-16 rounded bg-white/10' />
-          <div className='fitlog-skeleton h-4 w-16 rounded bg-white/10' />
-          <div className='fitlog-skeleton h-4 w-10 rounded bg-white/10' />
-        </div>
-      </div>
-    </article>
-  )
-}
-
-export default function Home () {
   return (
     <>
       <section className='relative overflow-hidden border-b border-white/10 bg-[radial-gradient(ellipse_at_75%_40%,rgba(204,255,0,0.08),transparent_42%)]'>
-        <div className='mx-auto grid max-w-[1440px] items-center gap-8 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:px-12 lg:py-24'>
+        <div className='mx-auto grid max-w-360 items-center gap-8 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:px-12 lg:py-24'>
           <div className='relative z-10'>
             <p className='mb-5 flex items-center gap-2 text-xs font-black tracking-[0.25em] text-[#ccff00]'>
               <span className='h-2 w-2 rounded-full bg-[#ccff00]' />
@@ -70,11 +45,11 @@ export default function Home () {
             </div>
           </div>
 
-          <div className='relative mx-auto w-full max-w-[440px] lg:max-w-none'>
-            <div className='absolute inset-8 rounded-full bg-[#ccff00]/[0.06] blur-3xl' />
+          <div className='relative mx-auto w-full max-w-110 lg:max-w-none'>
+            <div className='absolute inset-8 rounded-full bg-[#ccff00]/6 blur-3xl' />
 
-            <div className='relative flex aspect-square items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[#10120e]'>
-              <div className='absolute inset-4 rounded-[1.5rem] border border-dashed border-white/10' />
+            <div className='relative flex aspect-square items-center justify-center overflow-hidden rounded-4xl border border-white/10 bg-[#10120e]'>
+              <div className='absolute inset-4 rounded-3xl border border-dashed border-white/10' />
 
               <div className='absolute top-6 left-6 z-10 rounded-full border border-white/10 bg-black/50 px-3 py-2 text-[9px] font-bold tracking-[0.18em] text-neutral-300 backdrop-blur'>
                 MOVEMENT / DISCIPLINE
@@ -82,9 +57,9 @@ export default function Home () {
 
               <Image
                 src='/images/banner.png'
-                alt='Illustration of a person performing a seated gym exercise'
-                width={334}
-                height={334}
+                alt='FitLog fitness illustration'
+                width={440}
+                height={440}
                 priority
                 className='relative z-10 h-auto w-[84%] drop-shadow-[0_0_35px_rgba(204,255,0,0.08)]'
               />
@@ -108,50 +83,7 @@ export default function Home () {
         </div>
       </section>
 
-      <section
-        id='library'
-        className='section-anchor mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-20'
-      >
-        <div className='mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between'>
-          <div>
-            <p className='mb-3 text-[10px] font-black tracking-[0.22em] text-[#ccff00]'>
-              FIND YOUR NEXT LIFT
-            </p>
-
-            <h2 className='text-4xl font-black tracking-tight text-white sm:text-5xl'>
-              THE <span className='text-[#ccff00]'>LIBRARY</span>
-            </h2>
-
-            <p className='mt-3 text-sm text-neutral-400'>
-              Twelve lifts covering every major muscle group.
-            </p>
-          </div>
-
-          <span className='inline-flex w-fit items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-[10px] font-bold tracking-wider text-neutral-400'>
-            <span className='h-2 w-2 animate-pulse rounded-full bg-[#ccff00]' />
-            WORKOUT DATA
-          </span>
-        </div>
-
-        <div
-          role='status'
-          aria-live='polite'
-          className='mb-5 flex items-center gap-3 text-xs text-neutral-400'
-        >
-          <span className='h-4 w-4 animate-spin rounded-full border-2 border-white/15 border-t-[#ccff00]' />
-          Loading workouts…
-        </div>
-
-        <div className='grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3'>
-          {Array.from({ length: 12 }, (_, index) => (
-            <WorkoutSkeleton key={index} index={index} />
-          ))}
-        </div>
-
-        <p className='mt-6 text-center text-xs text-neutral-600'>
-          Your workout library will appear here.
-        </p>
-      </section>
+      <WorkoutLibrary initialWorkouts={workouts} />
     </>
   )
 }

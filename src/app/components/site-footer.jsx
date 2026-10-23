@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function SiteFooter () {
   return (
     <footer className='border-t border-white/10 bg-[#080908]'>
-      <div className='mx-auto flex max-w-[1440px] flex-col gap-5 px-4 py-7 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-10'>
+      <div className='mx-auto flex max-w-360 flex-col gap-5 px-4 py-7 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-10'>
         <Link
           href='/'
           className='flex items-center gap-2.5'

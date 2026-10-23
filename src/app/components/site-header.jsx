@@ -79,7 +79,7 @@ export default function SiteHeader () {
 
   return (
     <header className='sticky top-0 z-50 border-b border-white/10 bg-[#080908]/95 backdrop-blur-xl'>
-      <div className='mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10'>
+      <div className='mx-auto flex max-w-360 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10'>
         <Link
           href='/'
           aria-label='FitLog home'
