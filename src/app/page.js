@@ -3,6 +3,9 @@ import { ArrowDownRight, Dumbbell } from 'lucide-react'
 import WorkoutLibrary from './components/workout-library'
 import { getWorkouts } from './lib/fitlog'
 
+// Workouts come from a live API, so render on every request instead of at build time.
+export const dynamic = 'force-dynamic'
+
 export default async function Home () {
   const workouts = await getWorkouts()
 

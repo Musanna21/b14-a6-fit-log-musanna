@@ -82,9 +82,11 @@ Today's Plan and Saved workouts are stored in the browser using localStorage. Th
 
 ## Deployment
 
-This project can be deployed to Netlify. Connect the GitHub repository to Netlify and allow it to detect the Next.js framework.
+This project deploys to Vercel or Netlify. Import the GitHub repository and let the platform detect Next.js; the build command is `npm run build`. Do not use a static export, because the pages fetch live workout data on every request.
 
-The build command is `npm run build`. Use Netlify's automatically detected Next.js configuration rather than a static-site export, because the application uses dynamic routes and server-side data fetching.
+Optional environment variable:
+
+- `FITLOG_API_URL` — a workout API URL to try before the two built-in ones.
 
 - **Live Demo:** Add the deployed URL after deployment.
 - **GitHub Repository:** Add your repository URL.
@@ -98,6 +100,7 @@ src/app/
 │   ├── site-footer.jsx
 │   ├── toast-provider.jsx
 │   ├── workout-actions.jsx
+│   ├── workout-image.jsx
 │   └── workout-library.jsx
 ├── lib/
 │   └── fitlog.js

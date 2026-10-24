@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- image URLs come from an external API with unknown hosts */
 'use client'
 
 import { useMemo, useState } from 'react'

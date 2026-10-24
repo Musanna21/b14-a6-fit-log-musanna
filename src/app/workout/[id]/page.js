@@ -12,6 +12,10 @@ import {
 
 import { getWorkoutById } from '../../lib/fitlog'
 import WorkoutActions from '../../components/workout-actions'
+import WorkoutImage from '../../components/workout-image'
+
+// Workouts come from a live API, so render on every request instead of at build time.
+export const dynamic = 'force-dynamic'
 
 export default async function WorkoutDetailPage ({ params }) {
   const { id } = await params
@@ -33,14 +37,9 @@ export default async function WorkoutDetailPage ({ params }) {
 
       <div className='grid gap-8 lg:grid-cols-[1fr_1.05fr] lg:gap-12'>
         <div className='relative min-h-75 overflow-hidden rounded-2xl border border-white/10 bg-[#111311] sm:min-h-105 lg:min-h-150'>
-          <img
-            src={workout.image || '/images/banner.png'}
+          <WorkoutImage
+            src={workout.image}
             alt={workout.name}
-            onError={event => {
-              if (!event.currentTarget.src.endsWith('/images/banner.png')) {
-                event.currentTarget.src = '/images/banner.png'
-              }
-            }}
             className='absolute inset-0 h-full w-full object-cover'
           />
 

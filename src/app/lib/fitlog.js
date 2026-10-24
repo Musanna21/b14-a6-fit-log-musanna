@@ -1,7 +1,11 @@
+// Optionally set FITLOG_API_URL in the environment to use a different API first.
 const API_BASES = [
+  process.env.FITLOG_API_URL,
   'https://api.abcz.workers.dev/api/fitlog',
   'https://api.api-store.workers.dev/api/fitlog'
-]
+].filter(Boolean)
+
+const REQUEST_TIMEOUT_MS = 5000
 
 function toNumber (value, fallback = 0) {
   if (typeof value === 'number') {
@@ -42,6 +46,18 @@ function unwrapArray (payload) {
   ]
 
   return candidates.find(Array.isArray) ?? []
+}
+
+function unwrapObject (payload) {
+  if (Array.isArray(payload)) return payload[0] ?? null
+
+  return (
+    payload?.data?.workout ??
+    payload?.data ??
+    payload?.workout ??
+    payload ??
+    null
+  )
 }
 
 export function normalizeWorkout (item) {
@@ -114,7 +130,8 @@ export async function getWorkouts () {
   for (const baseUrl of API_BASES) {
     try {
       const response = await fetch(baseUrl, {
-        cache: 'no-store'
+        cache: 'no-store',
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS)
       })
 
       if (!response.ok) continue
@@ -136,12 +153,14 @@ export async function getWorkouts () {
   return []
 }
 
-export async function getWorkoutById(id) {
-  const workouts = await getWorkouts();
+export async function getWorkoutById (id) {
+  const workouts = await getWorkouts()
 
-  return (
-    workouts.find(
-      workout => String(workout.id) === String(id)
-    ) ?? null
-  );
+  // An empty list means the API could not be reached. Throw so the error page
+  // (with a retry button) is shown instead of a misleading "not found".
+  if (workouts.length === 0) {
+    throw new Error('The workout API is currently unavailable.')
+  }
+
+  return workouts.find(workout => String(workout.id) === String(id)) ?? null
 }
