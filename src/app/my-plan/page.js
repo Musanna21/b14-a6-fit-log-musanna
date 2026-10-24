@@ -13,7 +13,6 @@ import {
   Flame,
   Search,
   Star,
-  Trash2,
   X
 } from 'lucide-react'
 import { toast } from 'react-toastify'

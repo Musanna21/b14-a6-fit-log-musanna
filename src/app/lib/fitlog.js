@@ -148,25 +148,12 @@ export async function getWorkouts () {
   return []
 }
 
-export async function getWorkoutById (id) {
-  for (const baseUrl of API_BASES) {
-    try {
-      const response = await fetch(`${baseUrl}/${encodeURIComponent(id)}`, {
-        cache: 'no-store'
-      })
+export async function getWorkoutById(id) {
+  const workouts = await getWorkouts();
 
-      if (!response.ok) continue
-
-      const payload = await response.json()
-      const raw = unwrapObject(payload)
-
-      const workout = normalizeWorkout(raw)
-
-      if (workout) return workout
-    } catch (error) {
-      console.error(`Failed to fetch workout ${id}`, error)
-    }
-  }
-
-  return null
+  return (
+    workouts.find(
+      workout => String(workout.id) === String(id)
+    ) ?? null
+  );
 }

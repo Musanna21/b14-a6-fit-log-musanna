@@ -1,6 +1,6 @@
 'use client'
 
-import { CalendarPlus, Bookmark, Check } from 'lucide-react'
+import { CalendarPlus, Bookmark } from 'lucide-react'
 import { toast } from 'react-toastify'
 
 const PLAN_KEY = 'fitlog-plan'
