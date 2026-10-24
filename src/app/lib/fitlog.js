@@ -44,18 +44,6 @@ function unwrapArray (payload) {
   return candidates.find(Array.isArray) ?? []
 }
 
-function unwrapObject (payload) {
-  if (Array.isArray(payload)) return payload[0] ?? null
-
-  return (
-    payload?.data?.workout ??
-    payload?.data ??
-    payload?.workout ??
-    payload ??
-    null
-  )
-}
-
 export function normalizeWorkout (item) {
   if (!item || typeof item !== 'object') return null
 

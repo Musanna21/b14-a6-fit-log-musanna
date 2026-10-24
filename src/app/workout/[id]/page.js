@@ -10,8 +10,8 @@ import {
   Repeat
 } from 'lucide-react'
 
-import { getWorkoutById } from '../../../lib/fitlog'
-import WorkoutActions from '../../../components/workout-actions'
+import { getWorkoutById } from '../../lib/fitlog'
+import WorkoutActions from '../../components/workout-actions'
 
 export default async function WorkoutDetailPage ({ params }) {
   const { id } = await params
